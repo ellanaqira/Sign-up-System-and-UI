@@ -9,7 +9,8 @@ class Login_Window:
         # main element
         self.main_elm = Main_Element(self.login_win)
         self.main_elm.Title()
-        self.main_elm.username_entry()
+        self.main_elm.fullname_entry()
+        self.main_elm.date_entry(self.login_win)
         self.main_elm.email_entry()
         self.main_elm.password_entry()
 
