@@ -1,12 +1,14 @@
 from tkinter import *
 from frame import Main_Frame
 from function import Main_Function
+from aset import Aset
 
 class Main_Element:
     def __init__(self, login_window):
         self.login_win = login_window
         self.frame = Main_Frame()
         self.main_func = Main_Function()
+        self.aset = Aset()
 
     # login title window
     def Title(self):
@@ -17,7 +19,7 @@ class Main_Element:
                       bg="#ffffff")
         title.grid(row=0, column=0, pady=(30,20))
 
-    # title and input class
+    # title entry + input entry class
     class Entry:
         def __init__(self, config):
             self.frame = config.get("frame", None)
@@ -41,7 +43,7 @@ class Main_Element:
                               width=30)
             typebar_e.grid(row=self.entry_row, column=self.entry_col, pady=(0,10))
 
-
+    # fullname entry
     def fullname_entry(self):
         self.config = {"frame" : self.frame.frame_entry,
                        "title" : "Full name :",
@@ -53,23 +55,28 @@ class Main_Element:
         self.fullname.title_entry()
         self.fullname.typebar_entry()
 
+    # date of birth entry
     def date_entry(self, root):
+        # date entry title
         date_title = Label(self.frame.frame_entry,
                            text="Date of birth",
                            bg="#ffffff",
                            fg="#2E2E2E")
         date_title.grid(row=3, column=0, sticky='w')
-
+        # open calendar button
         date_btn = Button(self.frame.frame_entry,
                           text="Open Calendar",
-                          pady=0,
-                          width=27,
+                          anchor='w',
+                          pady=1,
+                          padx=1,
+                          width=30,
                           bd=0,
                           bg="#eeeeee",
                           fg="#2E2E2E",
-                          command=lambda: self.main_func.open_calendar(root))
-        date_btn.grid(row=4, column=0)
+                          command=lambda: self.main_func.open_calendar(root, date_btn))
+        date_btn.grid(row=4, column=0, pady=(0,10))
 
+    # email entry
     def email_entry(self):
         self.config = {"frame" : self.frame.frame_entry,
                        "title" : "Email :",
@@ -81,6 +88,7 @@ class Main_Element:
         self.email.title_entry()
         self.email.typebar_entry()
 
+    # password entry
     def password_entry(self):
         self.config = {"frame" : self.frame.frame_entry,
                        "title" : "Password :",
@@ -91,3 +99,20 @@ class Main_Element:
         self.password = self.Entry(self.config)
         self.password.title_entry()
         self.password.typebar_entry()
+
+    # sign up button
+    def sign_up_button(self):
+        signup_btn = Button(self.frame.frame_entry,
+                            text="Sign Up",
+                            font=("sistem ui", 10, "bold"),
+                            bg="#5b7038",
+                            fg="#ffffff",
+                            padx=1,
+                            width=30)
+        signup_btn.grid(row=9, column=0, pady=(50,0))
+
+    # image label
+    def image_label(self):
+        img = Label(self.frame.right_frame,
+                    image=self.aset.label_img)
+        img.pack()

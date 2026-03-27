@@ -13,9 +13,11 @@ class Login_Window:
         self.main_elm.date_entry(self.login_win)
         self.main_elm.email_entry()
         self.main_elm.password_entry()
+        self.main_elm.sign_up_button()
+        self.main_elm.image_label()
 
     def win_setup(self):
-        self.login_win.geometry("400x500")
+        self.login_win.geometry("757x480")
         self.login_win.title("Login Window")
         self.login_win.configure(bg="#FFFFFF")
         
