@@ -7,4 +7,4 @@ def load_image(path, size):
 
 class Aset:
    def __init__(self):
-      self.label_img = load_image("bird.jpg", (370, 480))
+      self.label_img = load_image("sign_up_system/aset/bird.jpg", (370, 480))
