@@ -29,19 +29,19 @@ class Main_Element:
             self.entry_row = config.get("entry row", 0)
             self.entry_col = config.get("entry col", 0)
         def title_entry(self):
-            title_e = Label(self.frame,
+            self.title_e = Label(self.frame,
                        text=self.title,
                        bg="#ffffff",
                        fg="#2E2E2E")
-            title_e.grid(row=self.title_row, column=self.title_col, sticky='w')
+            self.title_e.grid(row=self.title_row, column=self.title_col, sticky='w')
 
         def typebar_entry(self):
-            typebar_e = Entry(self.frame,
+            self.typebar_e = Entry(self.frame,
                               bg="#eeeeee",
                               relief='flat',
                               bd=1,
                               width=30)
-            typebar_e.grid(row=self.entry_row, column=self.entry_col, pady=(0,10))
+            self.typebar_e.grid(row=self.entry_row, column=self.entry_col, pady=(0,10))
 
     # fullname entry
     def fullname_entry(self):
@@ -58,11 +58,11 @@ class Main_Element:
     # date of birth entry
     def date_entry(self, root):
         # date entry title
-        date_title = Label(self.frame.frame_entry,
+        self.date_title = Label(self.frame.frame_entry,
                            text="Date of birth",
                            bg="#ffffff",
                            fg="#2E2E2E")
-        date_title.grid(row=3, column=0, sticky='w')
+        self.date_title.grid(row=3, column=0, sticky='w')
         # open calendar button
         date_btn = Button(self.frame.frame_entry,
                           text="Open Calendar",
@@ -108,7 +108,14 @@ class Main_Element:
                             bg="#5b7038",
                             fg="#ffffff",
                             padx=1,
-                            width=30)
+                            width=30,
+                            command=lambda: self.main_func.get_user_data(self.fullname.typebar_e,
+                                                                         self.email.typebar_e,
+                                                                         self.password.typebar_e,
+                                                                         self.fullname.title_e,
+                                                                         self.email.title_e,
+                                                                         self.password.title_e,
+                                                                         self.date_title))
         signup_btn.grid(row=9, column=0, pady=(50,0))
 
     # image label
