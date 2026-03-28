@@ -1,5 +1,6 @@
-import datetime as dt
 from tkinter import *
+import datetime as dt
+import csv
 from tkcalendar import Calendar
 from aset import Aset
 
@@ -108,19 +109,45 @@ class Main_Function:
             print("email have been filled in")
 
     # get user data
-    def get_user_data(self, fullname_entry, date_button, email_entry, password_entry):
+    def get_user_data(self, fullname_entry, date_button, email_entry, password_entry, root):
         if self.name_and_password_status == True and self.email_status == True and self.date_status == True:
             fullname_entry.delete(0, 'end')
             date_button.config(text="")
             email_entry.delete(0, 'end')
             password_entry.delete(0, 'end')
+            fullname_entry.focus()
 
             self.user_data['Full name'].append(self.user_fullname)
             self.user_data['Date of birth'].append(self.user_birthdate)
             self.user_data['Email'].append(self.user_email)
             self.user_data['Password'].append(self.user_password)
-
             print(self.user_data)
 
+            csv_file = "sign_up_system/user_data/user_data.csv"
+            with open(csv_file, 'w', newline='') as file:
+                writer = csv.writer(file)
+                # Write header
+                writer.writerow(self.user_data.keys())
+                # Write self.user_data
+                rows = zip(*self.user_data.values())
+                writer.writerows(rows)
+
+            thanks_window = Toplevel(root)
+            thanks_window.attributes('-topmost', bool(True))
+            thanks_window.title("Thank you for sign up")
+            thanks_window.geometry("320x145")
+            thanks_window.resizable(False, False)
+            thanks_window.configure(bg="#ffffff")
+
+            thanks_label = Label(thanks_window,
+                                text="Thank you\nfor sign up! :D",
+                                bg="#ffffff", fg="#2E2E2E",
+                                font=("roboto", 15, 'bold'))
+            thanks_label.pack(pady=20)
+
+            close_btn = Button(thanks_window,
+                            text="Close",
+                            command=lambda: thanks_window.destroy())
+            close_btn.pack(pady=(20,0), fill='x')
         else:
             return None

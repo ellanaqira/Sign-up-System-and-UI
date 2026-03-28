@@ -90,7 +90,7 @@ class Main_Element:
 
     def email_warn(self):
         self.email_label = Label(self.frame.frame_entry,
-                          text="email not valid!",
+                          text="email address not valid!",
                           bg="#ffffff",
                           fg="#FFFFFF",
                           font=("system ui", 9),
@@ -123,7 +123,8 @@ class Main_Element:
                                             (self.main_func.get_email(self.email.typebar_e, self.email.title_e, self.email_label)),
                                             (self.main_func.get_birth_date(self.date_title)),
                                             (self.main_func.get_user_data(self.fullname.typebar_e, self.date_btn,
-                                                                          self.email.typebar_e, self.password.typebar_e))])
+                                                                          self.email.typebar_e, self.password.typebar_e,
+                                                                          self.login_win))])
         signup_btn.grid(row=10, column=0, pady=(50,0))
 
     # image label
