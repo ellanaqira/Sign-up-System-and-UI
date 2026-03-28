@@ -41,7 +41,7 @@ class Main_Element:
                               relief='flat',
                               bd=1,
                               width=30)
-            self.typebar_e.grid(row=self.entry_row, column=self.entry_col, pady=(0,10))
+            self.typebar_e.grid(row=self.entry_row, column=self.entry_col, pady=(0,0))
 
     # fullname entry
     def fullname_entry(self):
@@ -62,19 +62,19 @@ class Main_Element:
                            text="Date of birth",
                            bg="#ffffff",
                            fg="#2E2E2E")
-        self.date_title.grid(row=3, column=0, sticky='w')
+        self.date_title.grid(row=3, column=0, sticky='w', pady=(20,0))
         # open calendar button
-        date_btn = Button(self.frame.frame_entry,
-                          text="Open Calendar",
+        self.date_btn = Button(self.frame.frame_entry,
+                          text="",
                           anchor='w',
                           pady=1,
                           padx=1,
-                          width=30,
                           bd=0,
+                          width=30,
                           bg="#eeeeee",
                           fg="#2E2E2E",
-                          command=lambda: self.main_func.open_calendar(root, date_btn))
-        date_btn.grid(row=4, column=0, pady=(0,10))
+                          command=lambda: self.main_func.open_calendar(root, self.date_btn))
+        self.date_btn.grid(row=4, column=0, pady=(0,20))
 
     # email entry
     def email_entry(self):
@@ -88,13 +88,22 @@ class Main_Element:
         self.email.title_entry()
         self.email.typebar_entry()
 
+    def email_warn(self):
+        self.email_label = Label(self.frame.frame_entry,
+                          text="email not valid!",
+                          bg="#ffffff",
+                          fg="#FFFFFF",
+                          font=("system ui", 9),
+                          pady=0)
+        self.email_label.grid(row=7, column=0)
+
     # password entry
     def password_entry(self):
         self.config = {"frame" : self.frame.frame_entry,
                        "title" : "Password :",
-                       "title row" : 7,
+                       "title row" : 8,
                        "title col" : 0,
-                       "entry row" : 8,
+                       "entry row" : 9,
                        "entry col" : 0}
         self.password = self.Entry(self.config)
         self.password.title_entry()
@@ -109,17 +118,18 @@ class Main_Element:
                             fg="#ffffff",
                             padx=1,
                             width=30,
-                            command=lambda: self.main_func.get_user_data(self.fullname.typebar_e,
-                                                                         self.email.typebar_e,
-                                                                         self.password.typebar_e,
-                                                                         self.fullname.title_e,
-                                                                         self.email.title_e,
-                                                                         self.password.title_e,
-                                                                         self.date_title))
-        signup_btn.grid(row=9, column=0, pady=(50,0))
+                            command=lambda: [(self.main_func.get_name_pass(self.fullname.typebar_e, self.fullname.title_e,
+                                                                         self.password.typebar_e, self.password.title_e)),
+                                            (self.main_func.get_email(self.email.typebar_e, self.email.title_e, self.email_label)),
+                                            (self.main_func.get_birth_date(self.date_title)),
+                                            (self.main_func.get_user_data(self.fullname.typebar_e, self.date_btn,
+                                                                          self.email.typebar_e, self.password.typebar_e))])
+        signup_btn.grid(row=10, column=0, pady=(50,0))
 
     # image label
     def image_label(self):
         img = Label(self.frame.right_frame,
                     image=self.aset.label_img)
         img.pack()
+
+    

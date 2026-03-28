@@ -12,6 +12,7 @@ class Login_Window:
         self.main_elm.fullname_entry()
         self.main_elm.date_entry(self.login_win)
         self.main_elm.email_entry()
+        self.main_elm.email_warn()
         self.main_elm.password_entry()
         self.main_elm.sign_up_button()
         self.main_elm.image_label()
