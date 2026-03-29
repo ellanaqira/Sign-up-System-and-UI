@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 from frame import Main_Frame
 from function import Main_Function
 from aset import Aset
@@ -37,8 +38,8 @@ class Main_Element:
 
         def typebar_entry(self):
             self.typebar_e = Entry(self.frame,
-                              bg="#eeeeee",
-                              relief='flat',
+                              bg="#d9d9d9",
+                              relief='sunken',
                               bd=1,
                               width=30)
             self.typebar_e.grid(row=self.entry_row, column=self.entry_col, pady=(0,0))
@@ -55,34 +56,51 @@ class Main_Element:
         self.fullname.title_entry()
         self.fullname.typebar_entry()
 
+    # gender combobox
+    def gender_combobox(self):
+        # gender title
+        self.gender_title = Label(self.frame.frame_entry,
+                                  text="Gender :",
+                                  bg="#ffffff",
+                                  fg="#2E2E2E")
+        self.gender_title.grid(row=3, column=0, sticky='w', pady=(20,0))
+
+        # gender combobox
+        self.selected_gender = StringVar()
+        self.gender_box = ttk.Combobox(self.frame.frame_entry,
+                                   textvariable=self.selected_gender,
+                                   width=29)
+        self.gender_box.grid(row=4, column=0)
+        self.gender_box['value'] = ('', 'Male', 'Female', 'Prever not to say')
+        self.gender_box['state'] = 'readonly'
+
     # date of birth entry
     def date_entry(self, root):
         # date entry title
         self.date_title = Label(self.frame.frame_entry,
-                           text="Date of birth",
+                           text="Date of birth :",
                            bg="#ffffff",
                            fg="#2E2E2E")
-        self.date_title.grid(row=3, column=0, sticky='w', pady=(20,0))
+        self.date_title.grid(row=5, column=0, sticky='w', pady=(20,0))
         # open calendar button
         self.date_btn = Button(self.frame.frame_entry,
                           text="",
                           anchor='w',
-                          pady=1,
-                          padx=1,
-                          bd=0,
+                          pady=1, padx=1,
+                          bd=1, relief='sunken',
                           width=30,
-                          bg="#eeeeee",
+                          bg="#d9d9d9",
                           fg="#2E2E2E",
                           command=lambda: self.main_func.open_calendar(root, self.date_btn))
-        self.date_btn.grid(row=4, column=0, pady=(0,20))
+        self.date_btn.grid(row=6, column=0, pady=(0,20))
 
     # email entry
     def email_entry(self):
         self.config = {"frame" : self.frame.frame_entry,
                        "title" : "Email :",
-                       "title row" : 5,
+                       "title row" : 7,
                        "title col" : 0,
-                       "entry row" : 6,
+                       "entry row" : 8,
                        "entry col" : 0}
         self.email = self.Entry(self.config)
         self.email.title_entry()
@@ -92,18 +110,18 @@ class Main_Element:
         self.email_label = Label(self.frame.frame_entry,
                           text="email address not valid!",
                           bg="#ffffff",
-                          fg="#FFFFFF",
+                          fg="#ffffff",
                           font=("system ui", 9),
                           pady=0)
-        self.email_label.grid(row=7, column=0)
+        self.email_label.grid(row=9, column=0)
 
     # password entry
     def password_entry(self):
         self.config = {"frame" : self.frame.frame_entry,
                        "title" : "Password :",
-                       "title row" : 8,
+                       "title row" : 10,
                        "title col" : 0,
-                       "entry row" : 9,
+                       "entry row" : 11,
                        "entry col" : 0}
         self.password = self.Entry(self.config)
         self.password.title_entry()
@@ -120,12 +138,12 @@ class Main_Element:
                             width=30,
                             command=lambda: [(self.main_func.get_name_pass(self.fullname.typebar_e, self.fullname.title_e,
                                                                          self.password.typebar_e, self.password.title_e)),
-                                            (self.main_func.get_email(self.email.typebar_e, self.email.title_e, self.email_label)),
+                                            (self.main_func.get_user_gender(self.selected_gender, self.gender_title)),
                                             (self.main_func.get_birth_date(self.date_title)),
-                                            (self.main_func.get_user_data(self.fullname.typebar_e, self.date_btn,
-                                                                          self.email.typebar_e, self.password.typebar_e,
-                                                                          self.login_win))])
-        signup_btn.grid(row=10, column=0, pady=(50,0))
+                                            (self.main_func.get_email(self.email.typebar_e, self.email.title_e, self.email_label)),
+                                            (self.main_func.get_user_data(self.fullname.typebar_e, self.date_btn, self.gender_box,
+                                                                          self.email.typebar_e, self.password.typebar_e, self.login_win))])
+        signup_btn.grid(row=12, column=0, pady=(50,0))
 
     # image label
     def image_label(self):

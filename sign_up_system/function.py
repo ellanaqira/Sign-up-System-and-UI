@@ -7,7 +7,7 @@ from aset import Aset
 class Main_Function:
     def __init__(self):
         self.aset = Aset()
-        self.user_data = {'Full name' : [], 'Date of birth' : [], 'Email' : [], 'Password' : []}
+        self.user_data = {'Full name' : [], 'Gender' : [], 'Date of birth' : [], 'Email' : [], 'Password' : []}
     
     # open calendar function
     def open_calendar(self, root, open_calendar_button):
@@ -72,6 +72,18 @@ class Main_Function:
             self.name_and_password_status = True
             print("name and password have been filled in")
 
+    # get user gender
+    def get_user_gender(self, selected_gender, gender_title):
+        self.user_gender = selected_gender.get()
+        self.gender_status = False
+        if self.user_gender == "":
+            gender_title.config(text="Gender :", image=self.aset.red_dot, compound='left')
+            self.gender_status = False
+        else:
+            gender_title.config(text="Gender :", image='')
+            self.gender_status = True
+            print("gender have been filled in")
+
     # get user date of birth
     def get_birth_date(self, birthdate_label):
         self.date_status = False
@@ -94,7 +106,7 @@ class Main_Function:
         self.email_status = False
 
         email_address = ['@email.com', '@gmail.com', '@yahoo.com']
-        if any(domain in self.user_email for domain in email_address):
+        if any(self.user_email.endswith(domain) for domain in email_address):
             email_label.config(fg="#FFFFFF")
             email_title.config(image="", text="Email :")
             self.email_status = True
@@ -109,21 +121,23 @@ class Main_Function:
             print("email have been filled in")
 
     # get user data
-    def get_user_data(self, fullname_entry, date_button, email_entry, password_entry, root):
-        if self.name_and_password_status == True and self.email_status == True and self.date_status == True:
+    def get_user_data(self, fullname_entry, date_button, gender_combobox, email_entry, password_entry, root):
+        if self.name_and_password_status == True and self.date_status == True and self.gender_status == True and self.email_status == True:
             fullname_entry.delete(0, 'end')
             date_button.config(text="")
+            gender_combobox.current(0)
             email_entry.delete(0, 'end')
             password_entry.delete(0, 'end')
             fullname_entry.focus()
 
             self.user_data['Full name'].append(self.user_fullname)
             self.user_data['Date of birth'].append(self.user_birthdate)
+            self.user_data['Gender'].append(self.user_gender)
             self.user_data['Email'].append(self.user_email)
             self.user_data['Password'].append(self.user_password)
             print(self.user_data)
 
-            csv_file = "sign_up_system/user_data/user_data.csv"
+            csv_file = "organizing_data/user_data.csv"
             with open(csv_file, 'w', newline='') as file:
                 writer = csv.writer(file)
                 # Write header
