@@ -20,6 +20,7 @@ class Login_Window:
 
     def win_setup(self):
         self.login_win.geometry("785x540")
+        self.login_win.resizable(False, False)
         self.login_win.title("Login Window")
         self.login_win.configure(bg="#ffffff")
         
