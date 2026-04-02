@@ -1,5 +1,5 @@
 from tkinter import *
-import datetime as dt
+from datetime import datetime as dt
 import csv
 from tkcalendar import Calendar
 from aset import Aset
@@ -18,12 +18,8 @@ class Main_Function:
         self.calendar_win.title("Calendar")
         self.calendar_win.configure(bg="#ffffff")
 
-        date = dt.date.today()
-        self.cal = Calendar(self.calendar_win,
-                       selectmode = 'day',
-                       year = date.year, 
-                       month = date.month,
-                       day = date.day)
+        # date = dt.now()
+        self.cal = Calendar(self.calendar_win)
         self.cal.pack(pady=(10))
 
         self.cal_btn = Button(self.calendar_win,
@@ -33,7 +29,7 @@ class Main_Function:
 
     # select date from calendar function 
     def select_date(self, select_date_button):
-            self.user_birthdate = self.cal.get_date()
+            self.user_birthdate = str(dt.strptime(str(self.cal.get_date()), "%m/%d/%y").date())
             select_date_button.config(text=self.user_birthdate)
             self.calendar_win.destroy()
 
