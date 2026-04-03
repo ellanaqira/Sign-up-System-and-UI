@@ -145,19 +145,74 @@ class Main_Function:
             thanks_window = Toplevel(root)
             thanks_window.attributes('-topmost', bool(True))
             thanks_window.title("Thank you for sign up")
-            thanks_window.geometry("320x145")
+            thanks_window.geometry("330x336")
             thanks_window.resizable(False, False)
             thanks_window.configure(bg="#ffffff")
 
             thanks_label = Label(thanks_window,
-                                text="Thank you\nfor sign up! :D",
-                                bg="#ffffff", fg="#2E2E2E",
-                                font=("roboto", 15, 'bold'))
-            thanks_label.pack(pady=20)
+                    text="Thank you\nfor sign up! :D",
+                    bg="#ffffff", fg="#2E2E2E",
+                    font=("roboto", 15, 'bold'))
+            thanks_label.pack(pady=(20,0))
+
+            separator_1 = Label(thanks_window,
+                            text="_"*50,
+                            bg="#ffffff", fg="#585858")
+            separator_1.pack(pady=(0,10))
+
+            info_label1 = Label(thanks_window,
+                            bg="#ffffff", fg="#2E2E2E",
+                            justify='center',
+                            text="Registration data will be saved at")
+            info_label1.pack()
+
+            info_label2 = Label(thanks_window,
+                            bg="#fdf9c1", fg="#2E2E2E",
+                            justify='center',
+                            text="organizing_data/user_data.csv file",
+                            font=("system ui", 9, 'bold'))
+            info_label2.pack()
+
+            info_label3 = Label(thanks_window,
+                            bg="#ffffff", fg="#2E2E2E",
+                            justify='center',
+                            text="or you can use the template file at")
+            info_label3.pack()
+
+            info_label4 = Label(thanks_window,
+                            bg="#fdf9c1", fg="#2E2E2E",
+                            justify='center',
+                            text="organizing_data/template_data.csv",
+                            font=("system ui", 9, 'bold'))
+            info_label4.pack()
+
+            info_label5 = Label(thanks_window,
+                            bg="#ffffff", fg="#2E2E2E",
+                            justify='center',
+                            text="You can process this file at")
+            info_label5.pack(pady=(20,0))
+
+            info_label6 = Label(thanks_window,
+                            bg="#fdf9c1", fg="#2E2E2E",
+                            justify='center',
+                            text="organizing_data/organize.ipynb",
+                            font=("system ui", 9, 'bold'))
+            info_label6.pack()
+
+            info_label7 = Label(thanks_window,
+                            bg="#ffffff", fg="#2E2E2E",
+                            justify='center',
+                            text="using the Pandas library.")
+            info_label7.pack()
+
+            separator_2 = Label(thanks_window,
+                            text="_"*50,
+                            bg="#ffffff", fg="#585858")
+            separator_2.pack()
 
             close_btn = Button(thanks_window,
                             text="Close",
                             command=lambda: thanks_window.destroy())
-            close_btn.pack(pady=(20,0), fill='x')
+            close_btn.pack(fill='x')
         else:
             return None
