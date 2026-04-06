@@ -178,7 +178,7 @@ class Main_Function:
             separator_1.text_info()
 
             # text info 1st line
-            info_label1 = TEXT('Registration data will be saved at', '#ffffff', '#2E2E2E', None, None)
+            info_label1 = TEXT('Sign up data will be saved at', '#ffffff', '#2E2E2E', None, None)
             info_label1.text_info()
 
             # text info 2nd line
